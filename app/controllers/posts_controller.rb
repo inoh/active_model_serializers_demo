@@ -6,4 +6,10 @@ class PostsController < ApplicationController
   def create
     render json: User.first.posts.create(title: 'json', note: '作り方')
   end
+
+  def ranking
+    ranking = Post.select(:user_id, 'count(*) as count').group(:user_id).map { |post| Ranking.new(post) }
+
+    render json: ranking
+  end
 end
