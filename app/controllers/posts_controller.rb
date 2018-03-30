@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   end
 
   def ranking
-    ranking = Post.select(:user_id, 'count(*) as count').group(:user_id).preload(:user).map { |post| Ranking.new(post) }
+    ranking = Post.select(:user_id, 'count(*) as count').group(:user_id).preload(:user).map { |post| Ranking.new(post: post) }
 
     render json: ranking
   end
