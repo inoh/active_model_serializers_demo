@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
   def index
-    render json: Post.all, each_serializer: PostsSerializer
+    render json: Post.all,
+      include: { comments: [:user] },
+      each_serializer: PostsSerializer
   end
 
   def create
